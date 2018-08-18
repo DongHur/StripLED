@@ -42,20 +42,24 @@ def theaterChase(strip, color, wait_ms=50, iterations=10):
 
 def wheel(pos):
     """Generate rainbow colors across 0-255 positions."""
+    # pos: [0, 255]
     if pos < 85:
+        # color shade of a mixture of red and green
         return Color(pos * 3, 255 - pos * 3, 0)
     elif pos < 170:
-        pos -= 85
+        pos -= 85 # pos updates [0, 84]
+        # color shade of a mixture of red and blue
         return Color(255 - pos * 3, 0, pos * 3)
     else:
-        pos -= 170
+        pos -= 170 # pos updates [0, 84]
+        # color shade of a mixture of green and blue
         return Color(0, pos * 3, 255 - pos * 3)
 
 def rainbow(strip, wait_ms=20, iterations=1):
     """Draw rainbow that fades across all pixels at once."""
-    for j in range(256*iterations):
-        for i in range(strip.numPixels()):
-            strip.setPixelColor(i, wheel((i+j) & 255))
+    for j in range(256*iterations): # [0, 255]
+        for i in range(strip.numPixels()): # [0, 59]
+            strip.setPixelColor(i, wheel((i+j) & 255)) # goes from 0 to 255 and restarts back from 0 
         strip.show()
         time.sleep(wait_ms/1000.0)
 
