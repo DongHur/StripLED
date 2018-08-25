@@ -26,16 +26,16 @@ W: Color(255, 255, 255)
 3 5
 4 6
 """
-def rainFall1(strip, scale=0.2, wait_ms=100, iterations=10):
-	for k in iterations:
+def rainFall1(strip, scale=0.2, wait_ms=5000, iterations=10):
+	for k in range(iterations):
 		strip.setPixelColor(0, Color(0, 255, 0))
 		strip.show()
 		time.sleep(wait_ms/1000.0)
 		for j in range(strip.numPixels() - 1):
 			for i in range(strip.numPixels() - 1):
 				p_color = strip.getPixelColor(i)
-				green = (p_color >> 8) & 255
-				strip.setPixelColor(i, Color(0, green*scale, 0))
+				green = int((p_color-255)*scale+255)
+				strip.setPixelColor(i, Color(0, green, 0))
 				strip.setPixelColor(i+1, p_color)
 			strip.show()
 			time.sleep(wait_ms/1000.0)
@@ -43,8 +43,13 @@ def rainFall1(strip, scale=0.2, wait_ms=100, iterations=10):
 if __name__ == '__main__':
 	strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_BRIGHTNESS)
 	strip.begin()
+<<<<<<< HEAD
 	console.log('Rain Code will start falling!')
 	strip.setPixelColor(0, Color(0, 255, 0))
 	time.sleep(30)
 	strip.setPixelColor(0, Color(0, 0, 0))
 	# rainFall1(strip)
+=======
+	print('Rain Code will start falling!')
+	rainFall1(strip)
+>>>>>>> 29b17f955e13bf665a7616a761aef73ab70dd45c
