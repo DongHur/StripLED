@@ -37,7 +37,7 @@ def stepByStep(strip, color, wait_ms=500):
 		strip.show()
 
 def drop(strip, R_color, G_color, B_color, wait_ms=100):
-	for i in range(strip.numPixels()):
+	for i in range(strip.numPixels() + 3):
 		strip.setPixelColor(i, Color(R_color, G_color, B_color))
 		count = i
 		fade_factor = 0.8
@@ -46,22 +46,14 @@ def drop(strip, R_color, G_color, B_color, wait_ms=100):
 			strip.setPixelColor(count, Color(int(R_color*fade_factor), int(G_color*fade_factor), int(B_color*fade_factor)))
 			fade_factor *= 0.6
 		strip.show()
-		time.sleep(wait_ms/1000.0)
+		speed_factor = random.gauss(1, 0.2)
+		time.sleep(speed_factor*wait_ms/1000.0)
 		# if i is not - dim the light before i
 
 def rainFall1(strip, scale=0.2, wait_ms=5000, iterations=10):
-	for k in range(iterations):
-		strip.setPixelColor(0, Color(0, 255, 0))
-		strip.show()
-		time.sleep(wait_ms/1000.0)
-		for j in range(strip.numPixels() - 1):
-			for i in range(strip.numPixels() - 1):
-				p_color = strip.getPixelColor(i)
-				green = int((p_color-255)*scale+255)
-				strip.setPixelColor(i, Color(0, green, 0))
-				strip.setPixelColor(i+1, p_color)
-			strip.show()
-			time.sleep(wait_ms/1000.0)
+	while True:
+		drop(strip, 0, 0, 150)
+		
 
 def clearAll(strip):
 	for i in range(strip.numPixels()):
@@ -71,8 +63,12 @@ def clearAll(strip):
 if __name__ == '__main__':
 	strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
 	strip.begin()
-	drop(strip, 0, 0, 150)
-	time.sleep(1)
-	clearAll(strip)
+	# ***********************************
+	rainFall1(strip)
+	# ***********************************
+	# drop(strip, 0, 0, 150)
+	# time.sleep(1)
+	# clearAll(strip)
+	# ***********************************
 	# stepByStep(strip, Color(255, 0, 0))
 	# clearAll(strip)
