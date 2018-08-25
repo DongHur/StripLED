@@ -43,13 +43,9 @@ def rainFall1(strip, scale=0.2, wait_ms=5000, iterations=10):
 if __name__ == '__main__':
 	strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_BRIGHTNESS)
 	strip.begin()
-<<<<<<< HEAD
 	console.log('Rain Code will start falling!')
 	strip.setPixelColor(0, Color(0, 255, 0))
 	time.sleep(30)
 	strip.setPixelColor(0, Color(0, 0, 0))
 	# rainFall1(strip)
-=======
-	print('Rain Code will start falling!')
-	rainFall1(strip)
->>>>>>> 29b17f955e13bf665a7616a761aef73ab70dd45c
+
