@@ -7,6 +7,8 @@ LED_PIN = 18
 LED_FREQ_HZ = 800000
 LED_DMA = 10
 LED_BRIGHTNESS = 255
+LED_INVERT = False
+LED_CHANNEL = 0
 
 
 """
@@ -26,6 +28,14 @@ W: Color(255, 255, 255)
 3 5
 4 6
 """
+def stepByStep(strip, color, wait_ms=1000):
+	for i in range(0, strip.numPixels(), 1):
+		strip.setPixelColor(i, color)
+		strip.show()
+		time.sleep(wait_ms)
+		strip.setPixelColor(i, Color(0, 0, 0))
+		strip.show()
+
 def rainFall1(strip, scale=0.2, wait_ms=5000, iterations=10):
 	for k in range(iterations):
 		strip.setPixelColor(0, Color(0, 255, 0))
@@ -40,11 +50,32 @@ def rainFall1(strip, scale=0.2, wait_ms=5000, iterations=10):
 			strip.show()
 			time.sleep(wait_ms/1000.0)
 
+def clearAll(strip):
+	for i in range(strip.numPixels()):
+		strip.setPixelColor(i, Color(0, 0, 0))
+	strip.show()
+
 if __name__ == '__main__':
-	strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_BRIGHTNESS)
-	strip.begin()
-	strip.setPixelColor(0, Color(0, 255, 0))
-	time.sleep(30)
-	strip.setPixelColor(0, Color(0, 0, 0))
-	# rainFall1(strip)
+	strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+	stepByStep(strip, Color(150, 0, 0))
+
+	clearAll(strip)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
