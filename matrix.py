@@ -36,17 +36,17 @@ def stepByStep(strip, color, wait_ms=500):
 		strip.setPixelColor(i, Color(0, 0, 0))
 		strip.show()
 
-def drop(strip, R_color, G_color, B_color, wait_ms=500):
+def drop(strip, R_color, G_color, B_color, wait_ms=100):
 	for i in range(strip.numPixels()):
 		strip.setPixelColor(i, Color(R_color, G_color, B_color))
 		count = i
-		fade_factor = 0.5
+		fade_factor = 0.8
 		while(count > 0):
 			count-=1
-			strip.setPixelColor(count, Color(R_color*fade_factor, G_color*fade_factor, B_color*fade_factor))
-			fade_factor *= 0.5
+			strip.setPixelColor(count, Color(int(R_color*fade_factor), int(G_color*fade_factor), int(B_color*fade_factor)))
+			fade_factor *= 0.6
 		strip.show()
-		time.sleep(wait_ms/1000)
+		time.sleep(wait_ms/1000.0)
 		# if i is not - dim the light before i
 
 def rainFall1(strip, scale=0.2, wait_ms=5000, iterations=10):
