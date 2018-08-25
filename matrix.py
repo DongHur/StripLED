@@ -29,7 +29,7 @@ W: Color(255, 255, 255)
 4 6
 """
 def stepByStep(strip, color, wait_ms=1000):
-	for i in range(0, strip.numPixels(), 1):
+	for i in range(strip.numPixels()):
 		strip.setPixelColor(i, color)
 		strip.show()
 		time.sleep(wait_ms)
@@ -60,22 +60,3 @@ if __name__ == '__main__':
 	stepByStep(strip, Color(150, 0, 0))
 
 	clearAll(strip)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
