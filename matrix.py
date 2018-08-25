@@ -29,10 +29,10 @@ W: Color(255, 255, 255)
 4 6
 """
 def stepByStep(strip, color, wait_ms=1000):
-	for i in range(strip.numPixels()):
+	for i in range(0,15,1):
 		strip.setPixelColor(i, color)
 		strip.show()
-		time.sleep(wait_ms)
+		time.sleep(wait_ms/1000)
 		strip.setPixelColor(i, Color(0, 0, 0))
 		strip.show()
 
@@ -57,6 +57,7 @@ def clearAll(strip):
 
 if __name__ == '__main__':
 	strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
-	stepByStep(strip, Color(150, 0, 0))
-
-	clearAll(strip)
+	strip.begin()
+	stepByStep(strip, Color(255, 0, 0))
+	
+	# clearAll(strip
